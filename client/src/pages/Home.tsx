@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { API_BASE } from "@/lib/queryClient";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -174,7 +175,7 @@ export default function Home() {
     queryFn: async () => {
       const params = new URLSearchParams({ limit: "30" });
       if (filter !== "all") params.set("source", filter);
-      const res = await fetch(`/api/articles?${params.toString()}`);
+      const res = await fetch(`${API_BASE}/api/articles?${params.toString()}`);
       if (!res.ok) throw new Error("Failed to load articles");
       return res.json();
     },
